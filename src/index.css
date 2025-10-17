@@ -141,7 +141,7 @@ body {
       }
 
       img {
-        @apply container mx-auto w-2/3;
+        @apply container mx-auto w-2/3 lg:w-1/2;
       }
     }
 
