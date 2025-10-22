@@ -27,6 +27,10 @@ const Product = () => {
               className={clsx("bg-neutral-300", color === "#adb5bd" && "active")}
             />
             <div
+              onClick={() => setColor("#707070")}
+              className={clsx("bg-neutral-600", color === "#707070" && "active")}
+            />
+            <div
               onClick={() => setColor("#2e2c2e")}
               className={clsx("bg-neutral-900", color === "#2e2c2e" && "active")}
             />
