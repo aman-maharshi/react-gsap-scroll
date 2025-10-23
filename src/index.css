@@ -146,7 +146,7 @@ body {
     }
 
     video {
-      @apply mx-auto 2xl:translate-y-0;
+      @apply mx-auto;
     }
 
     button {
