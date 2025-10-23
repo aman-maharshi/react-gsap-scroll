@@ -137,7 +137,7 @@ body {
       @apply relative z-10 col-center;
 
       h1 {
-        @apply font-semibold lg:text-3xl 2xl:text-5xl text-white relative lg:top-15;
+        @apply font-semibold lg:text-3xl text-white relative lg:top-15;
       }
 
       img {
