@@ -193,7 +193,7 @@ body {
       }
 
       .rotation-control {
-        @apply flex-between bg-neutral-800 rounded-full px-2 py-2 gap-1;
+        @apply flex-between px-2 py-2 gap-1;
 
         .rotate-button {
           @apply size-10 rounded-full cursor-pointer bg-transparent text-white flex-center border border-neutral-600 hover:bg-neutral-700 hover:border-neutral-500 transition-colors duration-200;

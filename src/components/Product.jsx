@@ -20,7 +20,7 @@ const Product = () => {
       <div className="controls">
         {/*<p className="info">Macbook Pro | Available in 14" & 16" in Space Gray & Dark colors</p>*/}
 
-        <div className="flex-center gap-5 mt-5">
+        <div className="flex-center gap-3 sm:gap-5 mt-5">
           <div className="color-control">
             <div
               onClick={() => setColor("#adb5bd")}
