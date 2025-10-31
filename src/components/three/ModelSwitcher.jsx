@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useImperativeHandle, forwardRef } from "react"
 import { PresentationControls } from "@react-three/drei"
 import gsap from "gsap"
 
@@ -7,6 +7,7 @@ import MacbookModel14 from "../models/Macbook-14.jsx"
 import { useGSAP } from "@gsap/react"
 const ANIMATION_DURATION = 1
 const OFFSET_DISTANCE = 5
+const ROTATION_STEP = Math.PI / 6 // 30 degrees
 
 const fadeMeshes = (group, opacity) => {
   if (!group) return
@@ -25,7 +26,7 @@ const moveGroup = (group, x) => {
   gsap.to(group.position, { x, duration: ANIMATION_DURATION })
 }
 
-const ModelSwitcher = ({ scale, isMobile }) => {
+const ModelSwitcher = forwardRef(({ scale, isMobile }, ref) => {
   const SCALE_LARGE_DESKTOP = 0.08
   const SCALE_LARGE_MOBILE = 0.05
 
@@ -33,6 +34,37 @@ const ModelSwitcher = ({ scale, isMobile }) => {
   const largeMacbookRef = useRef()
 
   const showLargeMacbook = scale === SCALE_LARGE_DESKTOP || scale === SCALE_LARGE_MOBILE
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      rotateLeft: () => {
+        const currentScale = scale
+        const isLarge = currentScale === SCALE_LARGE_DESKTOP || currentScale === SCALE_LARGE_MOBILE
+        const activeGroup = isLarge ? largeMacbookRef.current : smallMacbookRef.current
+        if (activeGroup) {
+          gsap.to(activeGroup.rotation, {
+            y: activeGroup.rotation.y - ROTATION_STEP,
+            duration: 0.3,
+            ease: "power2.out"
+          })
+        }
+      },
+      rotateRight: () => {
+        const currentScale = scale
+        const isLarge = currentScale === SCALE_LARGE_DESKTOP || currentScale === SCALE_LARGE_MOBILE
+        const activeGroup = isLarge ? largeMacbookRef.current : smallMacbookRef.current
+        if (activeGroup) {
+          gsap.to(activeGroup.rotation, {
+            y: activeGroup.rotation.y + ROTATION_STEP,
+            duration: 0.3,
+            ease: "power2.out"
+          })
+        }
+      }
+    }),
+    [scale]
+  )
 
   useGSAP(() => {
     if (showLargeMacbook) {
@@ -73,5 +105,8 @@ const ModelSwitcher = ({ scale, isMobile }) => {
       </PresentationControls>
     </>
   )
-}
+})
+
+ModelSwitcher.displayName = "ModelSwitcher"
+
 export default ModelSwitcher

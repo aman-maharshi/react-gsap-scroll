@@ -1,8 +1,7 @@
 import useMacbookStore from "../store"
 import clsx from "clsx"
 import { Canvas } from "@react-three/fiber"
-import { Box, OrbitControls } from "@react-three/drei"
-import MacbookModel14 from "./models/Macbook-14.jsx"
+import { useRef } from "react"
 
 import StudioLights from "./three/StudioLights.jsx"
 import ModelSwitcher from "./three/ModelSwitcher.jsx"
@@ -10,6 +9,7 @@ import { useMediaQuery } from "react-responsive"
 
 const Product = () => {
   const { color, scale, setColor, setScale } = useMacbookStore()
+  const modelSwitcherRef = useRef()
 
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" })
 
@@ -50,13 +50,34 @@ const Product = () => {
               <p>16"</p>
             </div>
           </div>
+
+          <div className="rotation-control">
+            <button
+              onClick={() => modelSwitcherRef.current?.rotateLeft()}
+              className="rotate-button"
+              aria-label="Rotate left"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              onClick={() => modelSwitcherRef.current?.rotateRight()}
+              className="rotate-button"
+              aria-label="Rotate right"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
       <Canvas id="canvas" camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}>
         <StudioLights />
 
-        <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
+        <ModelSwitcher ref={modelSwitcherRef} scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
       </Canvas>
     </section>
   )
