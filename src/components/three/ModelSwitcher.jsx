@@ -61,6 +61,49 @@ const ModelSwitcher = forwardRef(({ scale, isMobile }, ref) => {
             ease: "power2.out"
           })
         }
+      },
+      rotateUp: () => {
+        const currentScale = scale
+        const isLarge = currentScale === SCALE_LARGE_DESKTOP || currentScale === SCALE_LARGE_MOBILE
+        const activeGroup = isLarge ? largeMacbookRef.current : smallMacbookRef.current
+        if (activeGroup) {
+          gsap.to(activeGroup.rotation, {
+            x: activeGroup.rotation.x - ROTATION_STEP,
+            duration: 0.3,
+            ease: "power2.out"
+          })
+        }
+      },
+      rotateDown: () => {
+        const currentScale = scale
+        const isLarge = currentScale === SCALE_LARGE_DESKTOP || currentScale === SCALE_LARGE_MOBILE
+        const activeGroup = isLarge ? largeMacbookRef.current : smallMacbookRef.current
+        if (activeGroup) {
+          gsap.to(activeGroup.rotation, {
+            x: activeGroup.rotation.x + ROTATION_STEP,
+            duration: 0.3,
+            ease: "power2.out"
+          })
+        }
+      },
+      reset: () => {
+        const currentScale = scale
+        const isLarge = currentScale === SCALE_LARGE_DESKTOP || currentScale === SCALE_LARGE_MOBILE
+        const activeGroup = isLarge ? largeMacbookRef.current : smallMacbookRef.current
+        if (activeGroup) {
+          gsap.to(activeGroup.rotation, {
+            x: 0,
+            y: 0,
+            z: 0,
+            duration: 0.5,
+            ease: "power2.out"
+          })
+          gsap.to(activeGroup.position, {
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out"
+          })
+        }
       }
     }),
     [scale]

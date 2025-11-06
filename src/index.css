@@ -166,17 +166,17 @@ body {
     }
 
     .controls {
-      @apply absolute z-50 bottom-40 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2;
+      @apply absolute z-50 bottom-40 lg:bottom-30 left-1/2 -translate-x-1/2 w-full;
 
       .info {
         @apply text-xs text-white bg-black/20 px-2 py-1 rounded-lg;
       }
 
       .color-control {
-        @apply flex-between bg-neutral-800 rounded-full px-6 py-3 gap-4;
+        @apply flex-between bg-neutral-800 rounded-full px-4 py-2 sm:px-6 sm:py-3 gap-4;
 
         div {
-          @apply size-7 rounded-full cursor-pointer;
+          @apply size-5 sm:size-7 rounded-full cursor-pointer;
         }
 
         .active {
@@ -185,25 +185,41 @@ body {
       }
 
       .size-control {
-        @apply small-medium flex-between bg-neutral-800 rounded-full px-6 py-2.5 gap-2;
+        @apply small-medium flex-between bg-neutral-800 rounded-full px-4 py-2 sm:px-6 sm:py-2.5 gap-2;
 
         div {
-          @apply size-8 rounded-full cursor-pointer bg-white text-black flex-center;
+          @apply size-6 sm:size-8 rounded-full cursor-pointer bg-white text-black flex-center;
         }
       }
 
-      .rotation-control {
-        @apply flex-between px-2 py-2 gap-1;
+      .navigation-control {
+        @apply px-2 py-2;
 
-        .rotate-button {
-          @apply size-10 rounded-full cursor-pointer bg-transparent text-white flex-center border border-neutral-600 hover:bg-neutral-700 hover:border-neutral-500 transition-colors duration-200;
+        .nav-grid {
+          @apply grid grid-cols-3 grid-rows-3 gap-0.5 sm:gap-1;
 
-          svg {
-            @apply w-5 h-5;
+          .nav-spacer {
+            @apply w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10;
           }
 
-          &:active {
-            @apply scale-95;
+          .nav-button {
+            @apply size-7 sm:size-8 md:size-10 rounded-full cursor-pointer bg-neutral-800 text-white flex-center hover:bg-neutral-700 hover:border-neutral-500 transition-all duration-200;
+
+            svg {
+              @apply w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5;
+            }
+
+            &:active {
+              @apply scale-95;
+            }
+
+            &.reset-button {
+              @apply bg-neutral-800 border-neutral-500 hover:bg-neutral-600;
+
+              svg {
+                @apply opacity-70;
+              }
+            }
           }
         }
       }
