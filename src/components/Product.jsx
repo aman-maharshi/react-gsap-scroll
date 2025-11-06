@@ -5,6 +5,7 @@ import { useRef } from "react"
 
 import StudioLights from "./three/StudioLights.jsx"
 import ModelSwitcher from "./three/ModelSwitcher.jsx"
+import NavigationControl from "./NavigationControl.jsx"
 import { useMediaQuery } from "react-responsive"
 
 const Product = () => {
@@ -51,73 +52,7 @@ const Product = () => {
             </div>
           </div>
 
-          <div className="navigation-control">
-            <div className="nav-grid">
-              <div className="nav-spacer"></div>
-              <button
-                onClick={() => modelSwitcherRef.current?.rotateUp()}
-                className="nav-button"
-                aria-label="Rotate up"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M18 15l-6-6-6 6" />
-                </svg>
-              </button>
-              <div className="nav-spacer"></div>
-
-              <button
-                onClick={() => modelSwitcherRef.current?.rotateLeft()}
-                className="nav-button"
-                aria-label="Rotate left"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                onClick={() => modelSwitcherRef.current?.reset()}
-                className="nav-button reset-button"
-                aria-label="Reset"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-                  <path d="M21 3v5h-5" />
-                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-                  <path d="M3 21v-5h5" />
-                </svg>
-              </button>
-              <button
-                onClick={() => modelSwitcherRef.current?.rotateRight()}
-                className="nav-button"
-                aria-label="Rotate right"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-
-              <div className="nav-spacer"></div>
-              <button
-                onClick={() => modelSwitcherRef.current?.rotateDown()}
-                className="nav-button"
-                aria-label="Rotate down"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
-              </button>
-              <div className="nav-spacer"></div>
-            </div>
-          </div>
+          <NavigationControl modelSwitcherRef={modelSwitcherRef} />
         </div>
       </div>
 
