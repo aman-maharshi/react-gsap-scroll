@@ -2,6 +2,7 @@ import useMacbookStore from "../store"
 import clsx from "clsx"
 import { Canvas } from "@react-three/fiber"
 import { useRef } from "react"
+import { useProgress } from "@react-three/drei"
 
 import StudioLights from "./three/StudioLights.jsx"
 import ModelSwitcher from "./three/ModelSwitcher.jsx"
@@ -11,6 +12,7 @@ import { useMediaQuery } from "react-responsive"
 const Product = () => {
   const { color, scale, setColor, setScale } = useMacbookStore()
   const modelSwitcherRef = useRef()
+  const { progress, active } = useProgress()
 
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" })
 
@@ -56,11 +58,27 @@ const Product = () => {
         </div>
       </div>
 
-      <Canvas id="canvas" camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}>
-        <StudioLights />
+      <div className="relative w-full">
+        {active && (
+          <div
+            className="absolute inset-0 z-[45] flex flex-col items-center justify-center gap-2 bg-black/75 px-6"
+            role="status"
+            aria-live="polite"
+            aria-busy="true"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wider text-dark-100">Loading assets</p>
+            <p className="text-4xl font-semibold tabular-nums text-white sm:text-5xl">
+              {Math.round(Math.min(100, Math.max(0, progress)))}%
+            </p>
+          </div>
+        )}
 
-        <ModelSwitcher ref={modelSwitcherRef} scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
-      </Canvas>
+        <Canvas id="canvas" camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}>
+          <StudioLights />
+
+          <ModelSwitcher ref={modelSwitcherRef} scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
+        </Canvas>
+      </div>
     </section>
   )
 }
